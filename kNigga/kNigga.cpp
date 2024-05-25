@@ -1,38 +1,55 @@
 ﻿#include <iostream>
 #include <string>
-
+#include <vector>
 
 using namespace std;
 
 class User {
 public: 
     void interface() {
-        bool isWorking = true;
-        while (isWorking) {
-            int a;
-            cout << "menu" << endl;
-            cin >> a;
-            switch (a) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                isWorking = false;
-                break;
-            }
+
+    }
+    void showAllBooks() {
+        for (size_t i = 0; i < bookCount; i++)
+        {
+            cout << i << ". \t" << arr[i].getName() << endl;
         }
     }
+    void addNewBook() {
+        book newC;
+        arr.push_back(newC);
+        bookCount++;
+    }
+    void deleteBook() {
+        cout << "Choose a book to delete" << endl;
+        showAllBooks();
+        int numToDelete = 0;
+        cin >> numToDelete;
+        
+        vector<book>::iterator it;
+        it = arr.begin();
+
+        arr.erase(it);
+    }
+    void findByName() {
+        string newBook;
+        cin >> newBook;
+        int pupupu = 0;
+        for (int i = 0; i < bookCount; i++)
+        {
+            if (arr[i].getName() == newBook){
+                    pupupu = i;
+            }
+        }
+        cout << arr[pupupu].getName();
+    }
 private:
-    class kNigga {
+    class book {
     public:
-        kNigga() {
+        string getName(){
+            return this->name;
+        }
+        book() {
             cout << "Input name" << endl;
             cin >> this->name;
             cout << "Input author" << endl;
@@ -42,13 +59,14 @@ private:
             cout << "Input ISBN" << endl;
             cin >> this->ISBN;
         }
-
     private:
         string name;
         string author;
         int dataPublished;
         string ISBN;
     };
+    vector<book> arr;
+    int bookCount;
 };
 
 int main()
