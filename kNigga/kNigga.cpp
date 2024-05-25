@@ -7,12 +7,43 @@ using namespace std;
 class User {
 public: 
     void interface() {
-
+        int menu = 0;
+        bool isWorking = true;
+        cout << "Options" << endl;
+        cout << "1: add a book" << endl;
+        cout << "2: delete a book" << endl;
+        cout << "3: find a book by the name" << endl;
+        cout << "4: show all books" << endl;
+        cout << "5: close a prog" << endl;
+        while (isWorking) 
+        {          
+            cout << "Your option: ";
+            cin >> menu;
+            cout << endl;
+            switch (menu) {
+            case 1:
+                addNewBook();
+                cout << "book added" << endl << endl;
+                break;
+            case 2:
+                deleteBook();
+                break;
+            case 3:
+                findByName();
+                break;
+            case 4:
+                showAllBooks();
+                break;
+            case 5:
+                isWorking = false;
+                break;
+            }
+        }
     }
     void showAllBooks() {
         for (size_t i = 0; i < bookCount; i++)
         {
-            cout << i << ". \t" << arr[i].getName() << endl;
+            cout << i+1 << ". \t" << arr[i].getName() << endl;
         }
     }
     void addNewBook() {
@@ -24,11 +55,9 @@ public:
         cout << "Choose a book to delete" << endl;
         showAllBooks();
         int numToDelete = 0;
-        cin >> numToDelete;
-        
+        cin >> numToDelete;       
         vector<book>::iterator it;
-        it = arr.begin();
-
+        it = arr.begin() + numToDelete;
         arr.erase(it);
     }
     void findByName() {
@@ -41,7 +70,7 @@ public:
                     pupupu = i;
             }
         }
-        cout << arr[pupupu].getName();
+        arr[pupupu].coutEverething();
     }
 private:
     class book {
@@ -50,14 +79,20 @@ private:
             return this->name;
         }
         book() {
-            cout << "Input name" << endl;
+            cout << "Input name: ";
             cin >> this->name;
-            cout << "Input author" << endl;
+            cout << "Input author: ";
             cin >> this->author;
-            cout << "Input dataPublished" << endl;
+            cout << "Input dataPublished: ";
             cin >> this->dataPublished;
-            cout << "Input ISBN" << endl;
+            cout << "Input ISBN: ";
             cin >> this->ISBN;
+        }
+        void coutEverething() {
+            cout << "Name: " << this->name << endl;
+            cout << "Author: " << this->author << endl;
+            cout << "DataPublished: " << this->dataPublished << endl;
+            cout << "ISBN: " << this->ISBN << endl;
         }
     private:
         string name;
@@ -66,11 +101,13 @@ private:
         string ISBN;
     };
     vector<book> arr;
-    int bookCount;
+    int bookCount = 0;
 };
 
 int main()
 {
+    User a;
+    a.interface();
 
     return 0;
 }
